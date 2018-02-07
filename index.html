@@ -5,23 +5,34 @@
     <title>Coffee Project</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="fonts/Starjout.ttf" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="grey lighten-4">
 <div class="row">
     <nav>
         <div class="nav-wrapper grey darken-4">
-            <a href="#" class="brand-logo center">Dark Side Coffee</a>
+            <i class="center fab fa-empire" style="font-size: 4em; font-style: normal;"></i>
         </div>
     </nav>
 </div>
 <div class="container">
     <div class="row">
+        <div class="col s12">
+            <h1 id="site-brand" class="center-align">imperial coffee co.</h1>
+        </div>
+    </div>
+    <div class="fixed-action-btn horizontal">
+        <a href="#add-modal" class="tooltipped modal-trigger btn-floating btn-large grey darken-4" data-tooltip="Add a Coffee!" data-position="left" data-delay="30">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+    <div class="row">
         <div class="col s8">
             <form>
                 <div class="input-field grey-text text-darken-4">
-                    <input type="search" id="search">
+                    <input type="text" id="search">
                     <label for="search">Coffee Name</label>
                 </div>
             </form>
@@ -39,8 +50,35 @@
     <div class="row">
         <div id="coffees"></div>
     </div>
+
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <input type="text" id="modal-name">
+                        <label for="modal-name">Name</label>
+                    </div>
+                </div>
+                <div class="col s6">
+                   <div class="input-field">
+                       <select name="modal-roast-selection" id="modal-roast-selection">
+                           <option value="light">Light Roast</option>
+                           <option value="medium">Medium Roast</option>
+                           <option value="dark">Dark Roast</option>
+                       </select>
+                       <label>Roast Type</label>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a id="add-coffee-btn" href="#!" class="btn-flat waves-effect">Add Coffee!</a>
+        </div>
+    </div>
 </div>
 
+<script src="https://use.fontawesome.com/587a349dcc.js"></script>
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
