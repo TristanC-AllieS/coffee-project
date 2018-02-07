@@ -4,6 +4,17 @@ function renderCoffee(coffee) {
     var html = '<div class="coffee col s4"><div class="card"><div class="card-content">';
     html += '<span class="card-title">' + coffee.name + '</span>';
     html += '<p>' + coffee.roast + '</p>';
+    switch (coffee.roast){
+        case "light":
+            html += '<i class="fa fa-rebel"></i>';
+            break;
+        case "medium":
+            html += '<i class="fa fa-first-order"></i>';
+            break;
+        case "dark":
+            html += '<i class="fa fa-empire"></i>';
+            break;
+    }
     html += '</div></div></div>';
 
     return html;
@@ -57,7 +68,17 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
+var localCoffees;
+
 $(document).ready(function() {
+
+    localCoffees = localStorage.getItem("custom-coffees");
+
+    if (localCoffees !== null) {
+        coffees = JSON.parse(localCoffees);
+        updateCoffees();
+    }
+
     $('.modal').modal();
     $('select').material_select();
     $('#roast-selection').on('change', function (e) {
@@ -82,5 +103,14 @@ searchBar.addEventListener('input', function (e) {
 addCoffeeButton.addEventListener('click', function (e) {
     addCoffee(modalName.value, modalRoastSelection.value);
     updateCoffees(e);
+    localStorage.setItem("custom-coffees", JSON.stringify(coffees));
     $('#add-modal').modal('close');
 });
+
+window.onkeydown = function (e) {
+    var code = e.keyCode ? e.keyCode : e.which;
+    if (code === 220) {
+        localStorage.removeItem("custom-coffees");
+        console.log("localStorage cleared");
+    }
+};
