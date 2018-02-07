@@ -22,7 +22,7 @@ function updateCoffees(e) {
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
-        var regex = new RegExp(`.*${searchBar.value}.*$`, 'gim');
+        var regex = new RegExp(`^${searchBar.value}.*$`, 'gim');
         if (selectedRoast != "") {
             if (regex.test(coffee.name) && coffee.roast === selectedRoast)
                 filteredCoffees.push(coffee);
@@ -33,6 +33,10 @@ function updateCoffees(e) {
 
     });
     tbody.innerHTML = renderCoffees(filteredCoffees);
+}
+
+function addCoffee(name, roast) {
+    coffees.push({id: coffees.length + 1, name: name, roast: roast});
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -54,6 +58,7 @@ var coffees = [
 ];
 
 $(document).ready(function() {
+    $('.modal').modal();
     $('select').material_select();
     $('#roast-selection').on('change', function (e) {
         updateCoffees(e);
@@ -61,14 +66,21 @@ $(document).ready(function() {
 });
 
 var tbody = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
 var searchBar = document.querySelector("#search");
 var roastSelection = document.querySelector('#roast-selection');
+var modal = document.querySelector('#add-modal');
+var modalName = document.querySelector('#modal-name');
+var modalRoastSelection = document.querySelector('#modal-roast-selection');
+var addCoffeeButton = document.querySelector('#add-coffee-btn');
 
 tbody.innerHTML = renderCoffees(coffees);
 
-// submitButton.addEventListener('click', updateCoffees);
-
 searchBar.addEventListener('input', function (e) {
-updateCoffees(e);
+    updateCoffees(e);
+});
+
+addCoffeeButton.addEventListener('click', function (e) {
+    addCoffee(modalName.value, modalRoastSelection.value);
+    updateCoffees(e);
+    $('#add-modal').modal('close');
 });

@@ -1,5 +1,18 @@
+@font-face {
+    font-family: starwars;
+    src: url("fonts/Starjout.ttf");
+}
+
 html {
     font-family: Roboto, sans-serif;
+}
+
+#site-brand {
+    font-family: starwars;
+}
+
+#add-modal {
+    overflow-y: visible;
 }
 
 .coffee {
