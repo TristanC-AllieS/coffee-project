@@ -29,7 +29,7 @@
     </div>
     <div class="row">
         <div class="col s8">
-            <form>
+            <form autocomplete="off">
                 <div class="input-field grey-text text-darken-4">
                     <input type="text" id="search">
                     <label for="search">Coffee Name</label>
@@ -53,22 +53,24 @@
     <div id="add-modal" class="modal">
         <div class="modal-content">
             <div class="row">
-                <div class="col s6">
-                    <div class="input-field">
-                        <input type="text" id="modal-name">
-                        <label for="modal-name">Name</label>
+                <form autocomplete="off">
+                    <div class="col s6">
+                        <div class="input-field">
+                            <input type="text" id="modal-name">
+                            <label for="modal-name">Name</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col s6">
-                   <div class="input-field">
-                       <select name="modal-roast-selection" id="modal-roast-selection">
-                           <option value="light">Light Roast</option>
-                           <option value="medium">Medium Roast</option>
-                           <option value="dark">Dark Roast</option>
-                       </select>
-                       <label>Roast Type</label>
-                   </div>
-                </div>
+                    <div class="col s6">
+                        <div class="input-field">
+                            <select name="modal-roast-selection" id="modal-roast-selection">
+                                <option value="light">Light Roast</option>
+                                <option value="medium">Medium Roast</option>
+                                <option value="dark">Dark Roast</option>
+                            </select>
+                            <label>Roast Type</label>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="modal-footer">

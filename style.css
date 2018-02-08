@@ -54,11 +54,7 @@ body {
 }
 
 .card i {
-    position: absolute;
-    top: 16px;
-    margin: 0;
-    right: 16px;
-    font-size: 1.5em;
+    float: right;
 }
 
 .fa-empire {
