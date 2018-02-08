@@ -1,35 +1,49 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    var html = '<div class="coffee col s4"><div class="card"><div class="card-content">';
-    html += '<span class="card-title">' + coffee.name + '</span>';
-    html += '<p>' + coffee.roast + '</p>';
+
+    var html = '<div class="coffee col s4"><div class="card scale-transition scale-out"><div class="card-content">';
+
+    html += '<span class="card-title">' + coffee.name;
+
     switch (coffee.roast){
         case "light":
-            html += '<i class="fa fa-rebel"></i>';
+            html += '<i class="tooltipped fa fa-rebel"></i>';
             break;
         case "medium":
-            html += '<i class="fa fa-first-order"></i>';
+            html += '<i class="tooltipped fa fa-first-order"></i>';
             break;
         case "dark":
-            html += '<i class="fa fa-empire"></i>';
+            html += '<i class="tooltipped fa fa-empire"></i>';
             break;
     }
-    html += '</div></div></div>';
+
+    html += '</div></div></div></span>';
 
     return html;
 }
 
 function renderCoffees(coffees) {
+
     var html = '';
+
     for(var i = coffees.length - 1; i >= 0; i--) {
         html += renderCoffee(coffees[i]);
     }
+
+    setTimeout(function () {
+        $('.card').removeClass('scale-out');
+        $('.fa-rebel').tooltip({delay: 30, tooltip: "Light Roast", position: "top"});
+        $('.fa-first-order').tooltip({delay: 30, tooltip: "Medium Roast", position: "top"});
+        $('.fa-empire').tooltip({delay: 30, tooltip: "Dark Roast", position:"top"});
+    }, 30);
+
     return html;
 }
 
 function updateCoffees(e) {
-    // e.preventDefault(); // don't submit the form, we just want to update the data
+    if(e)
+        e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
@@ -41,7 +55,6 @@ function updateCoffees(e) {
             if (regex.test(coffee.name))
                 filteredCoffees.push(coffee);
         }
-
     });
     tbody.innerHTML = renderCoffees(filteredCoffees);
 }
