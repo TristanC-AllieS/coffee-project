@@ -54,8 +54,7 @@ function renderCoffees(coffees) {
 }
 
 function updateCoffees(e) {
-    if(e)
-        e.preventDefault(); // don't submit the form, we just want to update the data
+    if (e) e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
@@ -111,10 +110,14 @@ searchBar.addEventListener('input', function (e) {
 });
 
 addCoffeeButton.addEventListener('click', function (e) {
-    addCoffee(modalName.value, modalRoastSelection.value);
-    updateCoffees(e);
-    localStorage.setItem("custom-coffees", JSON.stringify(coffees));
-    $('#add-modal').modal('close');
+    if (!$("#modal-name").hasClass("invalid")) {
+        addCoffee(modalName.value, modalRoastSelection.value);
+        updateCoffees(e);
+        localStorage.setItem("custom-coffees", JSON.stringify(coffees));
+        $('#add-modal').modal('close');
+    } else {
+        Materialize.toast("Please Enter A Valid Coffee Name", 2000);
+    }
 });
 
 window.onkeydown = function (e) {
