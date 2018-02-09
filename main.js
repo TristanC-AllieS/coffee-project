@@ -1,8 +1,18 @@
 "use strict"
 
+var localCoffees;
+
+var tbody = document.querySelector('#coffees');
+var searchBar = document.querySelector("#search");
+var roastSelection = document.querySelector('#roast-selection');
+var modal = document.querySelector('#add-modal');
+var modalName = document.querySelector('#modal-name');
+var modalRoastSelection = document.querySelector('#modal-roast-selection');
+var addCoffeeButton = document.querySelector('#add-coffee-btn');
+
 function renderCoffee(coffee) {
 
-    var html = '<div class="coffee col s4"><div class="card scale-transition scale-out"><div class="card-content">';
+    var html = '<div class="coffee col s4"><div class="card hoverable scale-transition scale-out"><div class="card-content">';
 
     html += '<span class="card-title">' + coffee.name;
 
@@ -18,7 +28,9 @@ function renderCoffee(coffee) {
             break;
     }
 
-    html += '</div></div></div></span>';
+    html += '</span></div>';
+    html += '<div class="card-action center-align"><a href="#!" class="btn-flat waves-effect">Buy Now</a></div>'
+    html += '</div></div>';
 
     return html;
 }
@@ -33,17 +45,16 @@ function renderCoffees(coffees) {
 
     setTimeout(function () {
         $('.card').removeClass('scale-out');
-        $('.fa-rebel').tooltip({delay: 30, tooltip: "Light Roast", position: "top"});
-        $('.fa-first-order').tooltip({delay: 30, tooltip: "Medium Roast", position: "top"});
-        $('.fa-empire').tooltip({delay: 30, tooltip: "Dark Roast", position:"top"});
+        $('.tooltipped.fa-rebel').tooltip({delay: 30, tooltip: "Light Roast", position: "top"});
+        $('.tooltipped.fa-first-order').tooltip({delay: 30, tooltip: "Medium Roast", position: "top"});
+        $('.tooltipped.fa-empire').tooltip({delay: 30, tooltip: "Dark Roast", position:"top"});
     }, 30);
 
     return html;
 }
 
 function updateCoffees(e) {
-    if(e)
-        e.preventDefault(); // don't submit the form, we just want to update the data
+    if (e) e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
@@ -60,28 +71,21 @@ function updateCoffees(e) {
 }
 
 function addCoffee(name, roast) {
-    coffees.push({id: coffees.length + 1, name: name, roast: roast});
+    if( modalName.checkValidity() )
+        coffees.push({id: coffees.length + 1, name: name, roast: roast});
 }
 
-// from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
-    {id: 1, name: 'Light City', roast: 'light'},
-    {id: 2, name: 'Half City', roast: 'light'},
-    {id: 3, name: 'Cinnamon', roast: 'light'},
-    {id: 4, name: 'City', roast: 'medium'},
-    {id: 5, name: 'American', roast: 'medium'},
-    {id: 6, name: 'Breakfast', roast: 'medium'},
-    {id: 7, name: 'High', roast: 'dark'},
-    {id: 8, name: 'Continental', roast: 'dark'},
-    {id: 9, name: 'New Orleans', roast: 'dark'},
-    {id: 10, name: 'European', roast: 'dark'},
-    {id: 11, name: 'Espresso', roast: 'dark'},
-    {id: 12, name: 'Viennese', roast: 'dark'},
-    {id: 13, name: 'Italian', roast: 'dark'},
-    {id: 14, name: 'French', roast: 'dark'},
+    {id: 1, name: 'Skywalker Sunrise', roast: 'light'},
+    {id: 2, name: 'Yoda\'s Force Blend', roast: 'light'},
+    {id: 3, name: 'Jedi Brew', roast: 'light'},
+    {id: 4, name: 'Kylo Joe', roast: 'medium'},
+    {id: 5, name: 'Snoke\'s Breakfast Blend', roast: 'medium'},
+    {id: 6, name: 'TR-8Roast', roast: 'medium'},
+    {id: 7, name: 'Death Star Java', roast: 'dark'},
+    {id: 8, name: 'Palpatine\'s Electric Blend', roast: 'dark'},
+    {id: 9, name: 'Lord Vader\'s Espresso', roast: 'dark'},
 ];
-
-var localCoffees;
 
 $(document).ready(function() {
 
@@ -99,14 +103,6 @@ $(document).ready(function() {
     });
 });
 
-var tbody = document.querySelector('#coffees');
-var searchBar = document.querySelector("#search");
-var roastSelection = document.querySelector('#roast-selection');
-var modal = document.querySelector('#add-modal');
-var modalName = document.querySelector('#modal-name');
-var modalRoastSelection = document.querySelector('#modal-roast-selection');
-var addCoffeeButton = document.querySelector('#add-coffee-btn');
-
 tbody.innerHTML = renderCoffees(coffees);
 
 searchBar.addEventListener('input', function (e) {
@@ -114,10 +110,14 @@ searchBar.addEventListener('input', function (e) {
 });
 
 addCoffeeButton.addEventListener('click', function (e) {
-    addCoffee(modalName.value, modalRoastSelection.value);
-    updateCoffees(e);
-    localStorage.setItem("custom-coffees", JSON.stringify(coffees));
-    $('#add-modal').modal('close');
+    if (!$("#modal-name").hasClass("invalid")) {
+        addCoffee(modalName.value, modalRoastSelection.value);
+        updateCoffees(e);
+        localStorage.setItem("custom-coffees", JSON.stringify(coffees));
+        $('#add-modal').modal('close');
+    } else {
+        Materialize.toast("Please Enter A Valid Coffee Name", 2000);
+    }
 });
 
 window.onkeydown = function (e) {

@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col s8">
-            <form autocomplete="off">
+            <form id="search-form" autocomplete="off">
                 <div class="input-field grey-text text-darken-4">
                     <input type="text" id="search">
                     <label for="search">Coffee Name</label>
@@ -51,14 +51,20 @@
         <div id="coffees"></div>
     </div>
 
+    <div class="row">
+        <div class="col s12 center-align">
+            <iframe style="border: 0; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=150785289/size=small/bgcol=ffffff/linkcol=333333/artwork=none/transparent=true/" seamless><a href="http://8bituniverse.bandcamp.com/track/star-wars-theme-8-bit-tribute-to-john-williams">Star Wars Theme (8 Bit Tribute to John Williams) by 8 Bit Universe</a></iframe>
+        </div>
+    </div>
+
     <div id="add-modal" class="modal">
         <div class="modal-content">
             <div class="row">
-                <form autocomplete="off">
+                <form id="modal-form" autocomplete="off">
                     <div class="col s6">
                         <div class="input-field">
-                            <input type="text" id="modal-name">
-                            <label for="modal-name">Name</label>
+                            <input type="text" id="modal-name" class="validate" pattern=".{3,}" required>
+                            <label for="modal-name" data-error="Please Input A Value...">Name</label>
                         </div>
                     </div>
                     <div class="col s6">
@@ -75,7 +81,11 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a id="add-coffee-btn" href="#!" class="btn-flat waves-effect">Add Coffee!</a>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a id="add-coffee-btn" href="#!" class="btn-flat waves-effect">Add Coffee!</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

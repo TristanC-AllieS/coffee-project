@@ -17,6 +17,7 @@ body {
 
 #add-modal {
     overflow-y: visible;
+    transform: translateY(50%) scaleX(1) !important;
 }
 
 .coffee {
@@ -33,25 +34,30 @@ body {
 .input-field label {
     color: #000 !important;
 }
+
 /* label focus color */
 .input-field input[type=text]:focus + label {
-    color: red !important;
+    color: deepskyblue !important;
 }
+
 /* label underline focus color */
 .input-field input[type=text]:focus {
+    border-bottom: 1px solid deepskyblue !important;
+    box-shadow: none !important;
+}
+
+/* valid color */
+.input-field input[type=text]:focus:valid {
+    border-bottom: 1px solid deepskyblue !important;
+    box-shadow: none !important;
+}
+
+/* invalid color */
+.input-field input[type=text]:focus:invalid {
     border-bottom: 1px solid red !important;
     box-shadow: none !important;
 }
-/* valid color */
-.input-field input[type=text].valid {
-    border-bottom: 1px solid #000 !important;
-    box-shadow: 0 1px 0 0 #000 !important;
-}
-/* invalid color */
-.input-field input[type=text].invalid {
-    border-bottom: 1px solid #000 !important;
-    box-shadow: 0 1px 0 0 #000 !important;
-}
+
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #000 !important;
@@ -59,6 +65,10 @@ body {
 
 .card i {
     float: right;
+}
+
+.card-action a {
+    color: #000 !important;
 }
 
 .fa-empire {
@@ -72,3 +82,7 @@ body {
 .fa-rebel {
     color: deepskyblue;
 }
+
+/*.hoverable {*/
+    /*transition-duration: 60s !important;*/
+/*}*/
