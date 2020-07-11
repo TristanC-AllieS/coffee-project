@@ -54,11 +54,16 @@ function renderCoffees(coffees) {
 }
 
 function updateCoffees(e) {
+
     if (e) e.preventDefault(); // don't submit the form, we just want to update the data
+
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
+
     coffees.forEach(function(coffee) {
-        var regex = new RegExp(`^${searchBar.value}.*$`, 'gim');
+
+        var regex = new RegExp(`${searchBar.value}`, 'gi');
+
         if (selectedRoast != "") {
             if (regex.test(coffee.name) && coffee.roast === selectedRoast)
                 filteredCoffees.push(coffee);
@@ -67,6 +72,7 @@ function updateCoffees(e) {
                 filteredCoffees.push(coffee);
         }
     });
+
     tbody.innerHTML = renderCoffees(filteredCoffees);
 }
 
