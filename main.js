@@ -88,7 +88,7 @@ var coffees = [
     {id: 4, name: 'Kylo Joe', roast: 'medium'},
     {id: 5, name: 'Snoke\'s Breakfast Blend', roast: 'medium'},
     {id: 6, name: 'TR-8Roast', roast: 'medium'},
-    {id: 7, name: 'Death Star Java', roast: 'dark'},
+    {id: 7, name: 'Java the Hutt', roast: 'dark'},
     {id: 8, name: 'Palpatine\'s Electric Blend', roast: 'dark'},
     {id: 9, name: 'Lord Vader\'s Espresso', roast: 'dark'},
 ];
